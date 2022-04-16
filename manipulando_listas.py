@@ -21,3 +21,5 @@ lista.pop(7)
 print(lista)
 
 print(lista[-1])
+
+print(lista[::-1])
