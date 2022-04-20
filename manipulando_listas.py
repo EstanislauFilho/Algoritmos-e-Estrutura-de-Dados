@@ -23,3 +23,8 @@ print(lista)
 print(lista[-1])
 
 print(lista[::-1])
+
+
+lista = [i for i in range(10) if i % 2 == 0] # Compreensão de lista
+
+print(lista)
