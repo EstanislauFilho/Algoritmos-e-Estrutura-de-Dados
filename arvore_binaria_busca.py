@@ -69,7 +69,115 @@ class Arvore_Binaria_Busca:
                         nó_pai.inserir_filho_direita(nó)   # vai para direta
                         
                     break
+         
                 
+    def remover_na_arvore(self, chave):
+        nó_pai = None
+        nó_atual = self.raiz
+        
+        while nó_atual != None:
+            if chave == nó_atual.obter_chave():
+                
+                # nó a ser removido não possui filhos (nó folha)
+                if nó_atual.obter_filho_esquerda() == None and nó_atual.obter_filho_direita() == None:
+                    
+                    # verifica se é a raiz
+                    if nó_pai == None:
+                        self.raiz = None
+                    else:
+                        # verifica se é fiho a direita ou a esquerda
+                        if nó_pai.obter_filho_esquerda() == nó_atual:
+                            nó_pai.inserir_filho_esquerda(None)
+                        elif nó_pai.obter_filho_direita() == nó_atual:
+                            nó_pai.inserir_filho_direita(None)
+                            
+                # nó a ser removido possui somente um filho 
+                elif (nó_atual.obter_filho_esquerda() == None and nó_atual.obter_filho_direita() != None) or \
+                        (nó_atual.obter_filho_esquerda() != None and nó_atual.obter_filho_direita() == None):
+                     # verifica se é a raiz
+                    if nó_pai == None:
+                        if nó_atual.obter_filho_esquerda() != None:
+                            self.raiz = nó_atual.obter_filho_esquerda()
+                        else:
+                            self.raiz = nó_atual.obter_filho_direita()
+                    else:
+                        # verifica se o filho do nó_atual é o fiho da esquerda
+                        if nó_atual.obter_filho_esquerda() != None:
+                            if nó_pai.obter_filho_esquerda() and nó_pai.obter_filho_esquerda().obter_chave() == nó_atual.obter_chave():
+                                nó_pai.inserir_filho_esquerda(nó_atual.obter_filho_esquerda())
+                            else:
+                                nó_pai.inserir_filho_direita(nó_atual.obter_filho_esquerda())
+                            
+                        else: # senão o filho do nó_atual é o fiho da direita
+                            # verifica se nó atual é filho à esquerda    
+                            if nó_pai.obter_filho_esquerda() and nó_pai.obter_filho_esquerda().obter_chave() == nó_atual.obter_chave():
+                                nó_pai.inserir_filho_esquerda(nó_atual.obter_filho_direita())
+                            else:
+                                nó_pai.inserir_filho_direita(nó_atual.obter_filho_direita())
+                            
+                # nó a ser removido  possui dois filhos
+                elif (nó_atual.obter_filho_esquerda() != None and nó_atual.obter_filho_direita() != None):
+                   
+                    nó_pai_menor = nó_atual
+                    nó_menor = nó_atual.obter_filho_direita()
+                    proximo_menor = nó_atual.obter_filho_direita().obter_filho_esquerda()
+                    
+                    while proximo_menor != None:
+                        nó_pai_menor = nó_menor
+                        nó_menor = proximo_menor
+                        proximo_menor = nó_menor.obter_filho_esquerda
+                    
+                    # verifica se o nó a ser removido é a raiz
+                    if nó_pai == None:
+                        
+                        # Caso especial: o nó que ser a nova raiz é o filho da raiz
+                        if self.raiz.obter_filho_direita().obter_chave() == nó_menor.obter_chave():
+                            nó_menor.inserir_filho_esquerda(self.raiz.obter_filho_esquerda())
+                        else:
+                            # Verifica se o nó_menor é filho à esquerda ou à direita para setar para None o nó_menor
+                            if nó_pai_menor.obter_filho_esquerda() and nó_pai_menor.obter_filho_esquerda().obter_chave() == nó_menor.obter_chave():
+                                nó_pai_menor.inserir_filho_esquerda(None)
+                            else:
+                                nó_pai_menor.inserir_filho_direita(None)
+                                
+                            # seta os filhos á direita e esquerda de nó_menor
+                            nó_menor.inserir_filho_esquerda(nó_atual.obter_filho_esquerda())
+                            nó_menor.inserir_filho_direita(nó_atual.obter_filho_direita())
+                                
+                        # faz com que o nó_menor seja a raiz
+                        self.raiz = nó_menor
+                       
+                    else:
+                        # verifica se nó_atual é filho à esquerda ou à direita para setar o nó_menor como filho
+                        # do pai do nó_atual
+                        if nó_pai.obter_filho_esquerda() and nó_pai.obter_filho_esquerda().obter_chave() == nó_atual.obter_chave():
+                            nó_pai.inserir_filho_esquerda(nó_menor)
+                        else:
+                            nó_pai.inserir_filho_direita(nó_menor)
+                            
+                        # verifica se o nó_menor é filho à esquerda ou à direita para setar para None o nó_menor
+                        if nó_pai_menor.obter_filho_esquerda() and nó_pai_menor.obter_filho_esquerda().obter_chave() == nó_menor.obter_chave():
+                            nó_pai_menor.inserir_filho_esquerda(None)
+                        else:
+                            nó_pai_menor.inserir_filho_direita(None)
+                        
+                        # seta os filhos á direita e esquerda de nó_menor
+                        nó_menor.inserir_filho_esquerda(nó_atual.obter_filho_esquerda())
+                        nó_menor.inserir_filho_direita(nó_atual.obter_filho_direita())
+                        
+                break
+             
+            nó_pai = nó_atual
+
+            # verifica se vai para esquerda ou direita
+            if chave < nó_atual.obter_chave():
+                # vai para esquerda
+                nó_atual = nó_atual.obter_filho_esquerda()
+            else:
+                # vai para direita
+                nó_atual = nó_atual.obter_filho_direita()
+            
+                        
     def mostrar(self, nó_atual):
         
         if nó_atual != None:
@@ -92,4 +200,10 @@ abb.inserir_na_arvore(10)
 abb.inserir_na_arvore(14)
 abb.inserir_na_arvore(13)
 
+abb.remover_na_arvore(8)
+
 abb.mostrar(abb.obter_raiz())
+print()
+
+
+
