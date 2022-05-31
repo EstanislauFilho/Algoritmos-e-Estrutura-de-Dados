@@ -61,6 +61,7 @@ class Gerador_Grafos:
             if melhor_custo is None:
                 melhor_circuito = circuito[:]
                 melhor_custo = custo_circuito
+                print(f'Circuito inicial: {str(melhor_circuito)} - Custo: {melhor_custo}')
             else:
                 if custo_circuito < melhor_custo:
                     melhor_circuito = circuito[:]
