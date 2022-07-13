@@ -17,6 +17,8 @@ def fibonacci(n):
         return 1
     return fibonacci(n-1) + fibonacci(n-2)
 
+def somatorio(n):
+    return ((n*(n+1))/2)
 
 
 fatorial_lambda = lambda n: n * fatorial(n-1) if n > 1 else 1
@@ -32,3 +34,7 @@ print(math.cos(0))
 print(math.sin(30))
 print(math.sin(90))
 print(math.sqrt(25))
+
+
+print()
+print(somatorio(10))
