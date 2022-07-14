@@ -41,3 +41,16 @@ m = map(lambda x: x ** 2, lista_map)
 for i in m:
     print(i)
 #####################################################
+
+
+#####################################################
+# Demonstração função reduce
+import functools
+
+lista = [1, 2, 3, 4, 5]
+
+r = functools.reduce(lambda x, y: x + y, lista)
+
+print(lista)
+print(r)
+#####################################################
