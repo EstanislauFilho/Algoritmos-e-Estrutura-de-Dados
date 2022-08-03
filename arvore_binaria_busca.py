@@ -31,7 +31,6 @@ class Nó:
     def inserir_filho_direita(self, direita):
         self.filho_direita = direita
         
-
 class Arvore_Binaria_Busca:
     
     def __init__(self):
@@ -187,23 +186,102 @@ class Arvore_Binaria_Busca:
        
     def obter_raiz(self):
         return self.raiz
+
+
+# abb = Arvore_Binaria_Busca()
+
+# abb.inserir_na_arvore(8)
+# abb.inserir_na_arvore(3)
+# abb.inserir_na_arvore(1)
+# abb.inserir_na_arvore(6)
+# abb.inserir_na_arvore(4)
+# abb.inserir_na_arvore(7)
+# abb.inserir_na_arvore(10)
+# abb.inserir_na_arvore(14)
+# abb.inserir_na_arvore(13)
+
+# abb.remover_na_arvore(8)
+
+# abb.mostrar(abb.obter_raiz())
+# print()
+
+
+
+# Segunda Versão
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.esquerda = None
+        self.direita = None
+        
+    def show_node_data(self):
+        print(self.data)
+
+
+
+class Arvore_Binaria_Busca_2:
+    def __init__(self):
+        self.raiz = None
+
+    def inserir(self, valor):
+        novo = Node(valor)
+        if self.raiz == None:
+            self.raiz = novo
+        else:
+            atual = self.raiz
+            while True:
+                pai = atual
+                if valor < atual.data:
+                    atual = atual.esquerda
+                    if atual == None:
+                        pai.esquerda = novo
+                        return
+                else:
+                    atual = atual.direita
+                    if atual == None:
+                        pai.direita = novo
+                        return
+
+
+
+
+
+
+
+
+abb = Arvore_Binaria_Busca_2()
+
+abb.inserir(53)
+abb.inserir(30)
+abb.inserir(14)
+abb.inserir(39)
+abb.inserir(9)
+abb.inserir(23)
+abb.inserir(34)
+abb.inserir(49)
+abb.inserir(72)
+abb.inserir(61)
+abb.inserir(84)
+abb.inserir(79)
+
+print(abb.raiz.direita.data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
-abb = Arvore_Binaria_Busca()
 
-abb.inserir_na_arvore(8)
-abb.inserir_na_arvore(3)
-abb.inserir_na_arvore(1)
-abb.inserir_na_arvore(6)
-abb.inserir_na_arvore(4)
-abb.inserir_na_arvore(7)
-abb.inserir_na_arvore(10)
-abb.inserir_na_arvore(14)
-abb.inserir_na_arvore(13)
-
-abb.remover_na_arvore(8)
-
-abb.mostrar(abb.obter_raiz())
-print()
 
 
 
